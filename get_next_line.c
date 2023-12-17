@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chhoflac <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:34:24 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/16 23:35:29 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/17 14:28:42 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "get_next_line.h"
+
 char	*get_next_line(int fd)
 {
-
 }
