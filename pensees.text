@@ -1,0 +1,25 @@
+il faut que si j appelle une fois get next line il rende la ligne 1
+puis une deuxieme fois la deux 
+puis une troisieme fois la trois... 
+etc.
+--> 
+
+jusqua ce que la ligne soit vide
+--> boucle while jusqua ce que (si l[0] different de \n?) (a remplir)
+
+retourne la ligne qui doit etre lue
+--> sous forme de char *
+
+si n a plus rien a lire (fin de fichier)
+--> doit retourner NULL
+
+si une erreur 
+--> doit retourner NULL
+
+La fonction doit se comporter normalement quelle lise un fichier ou l'entree standard
+-->
+
+Toujours retourner la ligne lue suivie de 
+
+fin de doc :
+--> ???
