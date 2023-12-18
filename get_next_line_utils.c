@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 13:52:38 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/17 15:15:51 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/18 10:28:01 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,4 @@ size_t	ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
-}
-
-int main(void)
-{
-	char	*s = "abc";
-
-	printf("%ld", ft_strlen(s));
 }
