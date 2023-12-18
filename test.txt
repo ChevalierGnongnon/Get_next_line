@@ -1,0 +1,33 @@
+Hello
+Ceci est get next line 
+
+je ne sais pas ce que je fous la
+ni ce que je suis sensee faire     
+		je teste des tabs 
+je
+
+	teste	
+des trucs chelous
+
+je
+	vais remettre
+		en question 
+			mes choix de vie
+		et peut etre tout quitter
+	partir elever des lamas 
+en alaska
+
+allez on teste des chiffres
+
+1	2	3	4	5	6	7	8	9	10
+1.789
+
+et des caracteres speciaux
+[]{}!@()#$%^&*-_=+|\;:""'<>,.
+
+et le clavier qwerty (parce que pourquoi pas)
+qwertyuiop
+asdfghjkl
+zxcvbnm
+
+J ai plus d'idees et de toutes manieres je gagne juste du temps

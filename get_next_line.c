@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:34:24 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/17 14:28:42 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:19:20 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,8 @@
 
 char	*get_next_line(int fd)
 {
+	char	*buff;
+
+	read(fd, buff, 124);
+	return(buff);
 }
