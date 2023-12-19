@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 13:52:38 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/19 15:14:38 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:17:28 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ size_t	ft_strlen(char *s)
 }
 
 // to get the rest that will be stored in static char *
-char *ft_getrest(char *s, size_t i)
+char *ft_getrest(char *s)
 {
 	int			i;
 	static char	*rest;
 
+	rest = malloc(ft_strlen(s));
+	if(!rest)
+		return (NULL);
 	i = ft_strlen(s);
-	while (i >= 0)
+	while (s[i] != '\n')
 	{
 		rest[i] = s[i];
 		i--;
 	}
+	rest += 7;
+	printf("aze %s", rest);
 	if (i == 0)
 		return (NULL);
 	return (rest);
 }	
 
-char	*ft_strjoin(char const *s1, char const *s2)
+/*char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*s3;
 	size_t	i;
@@ -66,4 +71,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	s3[i] = '\0';
 	return (s3);
-}
+}*/

@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include "get_next_line.c"
+#include "get_next_line_utils.c"
 
 int main(void)
 {
-	char *path = "test.txt";
-	int fd = open(path, O_RDONLY);
-	char *s = get_next_line(fd);
-	printf("%s", s);
+	char *s1 = "abcdef\neroryhfb;wvli";
+	char *s2 = ft_getrest(s1);
+	printf("%s", s2);
 }

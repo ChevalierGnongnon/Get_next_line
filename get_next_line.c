@@ -6,12 +6,12 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:34:24 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/19 15:13:54 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/19 16:06:19 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE = 42
+#define BUFFER_SIZE 42
 
 /*char	*get_next_line(int fd)
 {
@@ -30,3 +30,5 @@ char    *get_next_line(int fd)
 
 	read(fd, buff, BUFFER_SIZE);
 }
+
+
