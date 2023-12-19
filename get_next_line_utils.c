@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/17 13:52:38 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/19 14:06:21 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/19 15:14:38 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,22 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+// to get the rest that will be stored in static char *
+char *ft_getrest(char *s, size_t i)
 {
-	int	i;
+	int			i;
+	static char	*rest;
 
-	i = 0;
-	while (s[i] != (char) c)
+	i = ft_strlen(s);
+	while (i >= 0)
 	{
-		if (s[i] == '\0')
-			return (NULL);
-		i++;
+		rest[i] = s[i];
+		i--;
 	}
-	return ((char *)&s[i]);
-}
+	if (i == 0)
+		return (NULL);
+	return (rest);
+}	
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
