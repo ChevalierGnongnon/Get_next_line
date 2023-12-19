@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 21:34:24 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/19 10:13:53 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:10:01 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@
 	read(fd, buff, 124);
 	return(buff);
 }*/
-char    get_next_line(int fd)
+char    *get_next_line(int fd)
 {
 	size_t	i;
-	size_t	read;
+	static char *temp;
+	static char buf[8];
 
 	i = 0;
-	while(i < read)
+	while(i < 1)
 	{
-		read()
+		read(fd, buf, 8);
 		i++;
 	}
 }

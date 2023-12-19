@@ -12,5 +12,4 @@ int main(void)
 	int fd = open(path, O_RDONLY);
 	char *s = get_next_line(fd);
 	printf("%s", s);
-
 }
