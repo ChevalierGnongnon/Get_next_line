@@ -51,3 +51,11 @@ ligne.
 
 fin de doc :
 --> ???
+
+1. use read to put in buff array the buffer size number of char in the file
+2. search for \n in buff array
+3. put what's after \n in temp
+4. display what's before \n 
+5. free buff 
+6. put what's in temp in buff and use strjoin to join with next
+7. free temp
