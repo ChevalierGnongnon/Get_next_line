@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/17 13:52:38 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/19 16:17:28 by chhoflac         ###   ########.fr       */
+/*   Created: 2023/12/21 21:41:21 by chhoflac          #+#    #+#             */
+/*   Updated: 2023/12/22 01:25:46 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 size_t	ft_strlen(char *s)
 {
@@ -23,52 +22,68 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 
-// to get the rest that will be stored in static char *
-char *ft_getrest(char *s)
+char	*ft_strchr(const char *s, int c)
 {
-	int			i;
-	static char	*rest;
+	int	i;
 
-	rest = malloc(ft_strlen(s));
-	if(!rest)
-		return (NULL);
-	i = ft_strlen(s);
-	while (s[i] != '\n')
+	i = 0;
+	while (s[i] != (char) c)
 	{
-		rest[i] = s[i];
-		i--;
+		if (s[i] == '\0')
+			return (NULL);
+		i++;
 	}
-	rest += 7;
-	printf("aze %s", rest);
-	if (i == 0)
-		return (NULL);
-	return (rest);
-}	
+	return ((char *)&s[i]);
+}
 
-/*char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*s3;
+	char	*s2;
 	size_t	i;
-	size_t	j;
+	size_t	J;
 
 	i = 0;
 	j = 0;
 	if (!s1 || !s2)
-		return (NULL);
-	s3 = (char *) malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (!s3)
 		return (NULL);
 	while (s1[i])
 	{
 		s3[i] = s1[i];
 		i++;
 	}
-	while (s2[j])
+	while s2[j]
 	{
 		s3[i] = s2[j];
-		j++;
 		i++;
+		j++;
 	}
 	s3[i] = '\0';
-	return (s3);
-}*/
+	return(s3);
+}
+
+char	*ft_substr(char *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	if (len == 0 || ft_strlen(s) <= start)
+		return (sub = ft_calloc(1, 1));
+	else if (len > ft_strlen(s) - start)
+		sub = ft_calloc(ft_strlen(s) - start + 1, 1);
+	else if (ft_strlen(s) > len)
+		sub = ft_calloc(len + 1, 1);
+	else
+		sub = ft_calloc(ft_strlen(s) + 1, 1);
+	if (!sub)
+		return (NULL);
+	while (i < len && s[start + i])
+	{
+		sub[i] = s[start + i];
+		i++;
+	}
+	sub[i] = '\0';
+	return (sub);
+}
