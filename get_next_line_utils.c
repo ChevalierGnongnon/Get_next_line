@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 21:41:21 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/22 01:25:46 by chhoflac         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:55:56 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)&s[i]);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	char	*s2;
+	char	*s3;
 	size_t	i;
-	size_t	J;
+	size_t	j;
 
 	i = 0;
 	j = 0;
@@ -51,7 +51,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		s3[i] = s1[i];
 		i++;
 	}
-	while s2[j]
+	while (s2[j])
 	{
 		s3[i] = s2[j];
 		i++;
@@ -86,4 +86,17 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i] != (char) c)
+	{
+		if (s[i] == '\0')
+			return (NULL);
+		i++;
+	}
+	return ((char *)&s[i]);
 }
