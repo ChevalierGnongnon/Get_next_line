@@ -5,42 +5,53 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/21 21:41:08 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/22 15:55:44 by chhoflac         ###   ########.fr       */
+/*   Created: 2023/12/29 09:33:27 by chhoflac          #+#    #+#             */
+/*   Updated: 2023/12/29 15:35:06 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include  "get_next_line.h"
 
-ft_cut(char *s)
-{
-
-}
-//Remplir le buffer
-char	*ft_readbytes(int fd, char *buf)
+char	*ft_cut(char *cont)
 {
 	size_t	i;
-	ssize_t ret;
-	static char	*stock;
+	char	*s;
 
 	i = 0;
-	while (!ft_strchr(buf, '\n'))
+	s = malloc(ft_str_stop(cont, '\n'));
+	while (cont[i] != '\n')
 	{
-		ret = read(fd, buf, BUFFER_SIZE);
-		stock = ft_strjoin(stock, buf);
-		if (ret == 0 && ft_strlen(buf) == 0)
-			break;
+		s[i] = cont[i];
+		i++;
 	}
-	return(buf);
+	s[i] = '\n';
+	s[i + 1] = '\0';
+	return (s);
 }
+void	ft_empty(char *cont)
+{
+	size_t	i;
 
-//GNL
+	i = 0;
+	while(cont[i] != '\n')
+	{
+		cont[i] = '\0';
+		i++;
+	}
+}
 char	*get_next_line(int fd)
 {
-	static char buff[BUFFER_SIZE];
-	char		*line;
+	static char cont[BUFFER_SIZE + 1];
+	ssize_t i;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	return (line);
+	if (cont[0] == '\0')
+		read(fd, cont, BUFFER_SIZE);
+	if (strchr(cont, '\n'))
+		return (ft_cut(cont));
+	
 }
+
+
+de ca --> test\nwgwrfliyurg
+a ca --> wgwrfliyurg\0\0\0\0\0  
+dans ft_empty
