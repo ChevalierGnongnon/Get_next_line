@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 09:33:27 by chhoflac          #+#    #+#             */
-/*   Updated: 2024/01/03 11:06:11 by chhoflac         ###   ########.fr       */
+/*   Updated: 2024/01/03 16:06:18 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_push_left(char *cont)
 		cursor++;
 		i++;
 	}
-	cont[cursor] = '\0';
+	cont[cursor] = '\0'; 
 }
 
 //si pas de \n
@@ -68,11 +68,16 @@ char	*ft_fill(char *cont)
 
 char	*get_next_line(int fd)
 {
-	static char cont[BUFFER_SIZE + 1];
+	static char cont[BUFFER_SIZE];
 
-	if (cont[0] == '\0')
+	if(cont[0] == '\0')
 		read(fd, cont, BUFFER_SIZE);
-	while (!ft_strchr(cont, '\n'))
-		read(fd, ft_fill(cont), BUFFER_SIZE);
-	return (ft_cut(cont));
+	else
+
+		while (!ft_strchr(cont, '\n'))
+		{
+			ft_fill(cont);
+			read(fd, cont, BUFFER_SIZE);
+		}
+	return (cont);
 }
