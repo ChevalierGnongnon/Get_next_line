@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 09:33:27 by chhoflac          #+#    #+#             */
-/*   Updated: 2024/01/05 18:08:51 by chhoflac         ###   ########.fr       */
+/*   Updated: 2024/01/05 17:17:11 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,70 +29,57 @@ void	ft_push_left(char *cont)
 		cont[i++] = '\0';
 }
 
-int	old_line(char **line, size_t nbchar)
+// mettre le contenu de buff dans ligne
+void	ft_fill(char *buff, char **line, size_t nbchar)
 {
 	char	*temp;
 	size_t	i;
 
-	i = 0;
-	temp = malloc(ft_strlen(*line) + nbchar + 1);
-	if (!temp)
-		return (1);
-	while (line[0][i])
-	{
-		temp[i] = line[0][i];
-		i++;
-	}
-	free(*line);
-	temp[i] = '\0';
-	*line = temp;
-	return (0);
-}
-
-// mettre le contenu de buff dans ligne
-int	ft_fill(char *buff, char **line, size_t nbchar)
-{
 	if (*line == 0)
 	{
 		*line = malloc(nbchar + 1);
-		if (!*line)
-			return (1);
 		line[0][0] = '\0';
 	}
 	else
-		if (old_line(line, nbchar))
-			return (1);
+	{
+		i = 0;
+		temp = malloc(ft_strlen(*line) + nbchar + 1);
+		while (line[0][i])
+		{
+			temp[i] = line[0][i];
+			i++;
+		}
+		free(*line);
+		temp[i] = '\0';
+		*line = temp;
+	}
 	ft_strlcat(*line, buff, ft_strlen(*line) + nbchar + 1);
 	if (!ft_strchr(buff, '\n'))
 		ft_bzero(buff, BUFFER_SIZE);
-	return (0);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	buff[BUFFER_SIZE + 1];
+	static char	buff[2048][BUFFER_SIZE + 1];
 	char		*line;
 	ssize_t		nbchar;
 
-	if (buff[0] == '\0' && read(fd, buff, BUFFER_SIZE) <= 0)
-		return (NULL);
+	if (buff[fd][0] == '\0')
+		if (read(fd, buff[fd], BUFFER_SIZE) <= 0)
+			return (NULL);
 	line = 0;
 	nbchar = 1;
-	while (!ft_strchr(buff, '\n'))
+	while (!ft_strchr(buff[fd], '\n'))
 	{
-		if (ft_fill(buff, &line, ft_strlen(buff)))
-			return (free(line), NULL);
-		nbchar = read(fd, buff, BUFFER_SIZE);
+		ft_fill(buff[fd], &line, ft_strlen(buff[fd]));
+		nbchar = read(fd, buff[fd], BUFFER_SIZE);
 		if (nbchar <= 0)
 			break ;
 	}
 	if (nbchar > 0)
-	{
-		if (ft_fill(buff, &line, ft_str_stop(buff, '\n') + 1))
-			return (free(line), NULL);
-	}
+		ft_fill(buff[fd], &line, ft_str_stop(buff[fd], '\n') + 1);
 	else if (nbchar < 0)
 		return (free(line), NULL);
-	ft_push_left(buff);
+	ft_push_left(buff[fd]);
 	return (line);
 }
