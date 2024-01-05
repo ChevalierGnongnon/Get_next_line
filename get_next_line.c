@@ -6,78 +6,80 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 09:33:27 by chhoflac          #+#    #+#             */
-/*   Updated: 2024/01/03 16:06:18 by chhoflac         ###   ########.fr       */
+/*   Updated: 2024/01/05 04:04:44 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "get_next_line.h"
-
-char	*ft_cut(char *cont)
-{
-	size_t	i;
-	char	*s;
-
-	i = 0;
-	s = malloc(ft_str_stop(cont, '\n'));
-	while (cont[i] != '\n')
-	{
-		s[i] = cont[i];
-		i++;
-	}
-	s[i] = '\n';
-	s[i + 1] = '\0';
-	return (s);
-}
 
 void	ft_push_left(char *cont)
 {
 	size_t	i;
 	size_t	cursor;
 
-	cursor = ft_str_stop(cont, '\n');
+	cursor = ft_str_stop(cont, '\n') + 1;
 	i = 0;
-	while (i < ft_str_stop(cont, '\n') || cont[cursor])
+	while (cont[cursor])
 	{
 		cont[i] = cont[cursor];
 		cursor++;
 		i++;
 	}
-	cont[cursor] = '\0'; 
+	while (cont[i])
+		cont[i++] = '\0';
 }
 
-//si pas de \n
-char	*ft_fill(char *cont)
+// mettre le contenu de buff dans ligne
+void	ft_fill(char *buff, char **line, size_t nbchar)
 {
-	char	*temp;
-	size_t	sze;
-	size_t	i;
-
-	temp = malloc(ft_str_stop(cont, '\0') + BUFFER_SIZE);
-	sze = ft_str_stop(cont, '\0');
-	i = 0;
-	while (temp[sze])
+	char *temp;
+	size_t i;
+	if (*line == 0)
 	{
-		temp[sze] = cont[i];
-		sze++;
-		i++;
+		*line = malloc(nbchar + 1);
+		line[0][0] = '\0';
 	}
-	cont = temp;
-	free(temp);
-	return (cont);
+	else
+	{
+		i = 0;
+		temp = malloc(ft_strlen(*line) + nbchar + 1);
+		while (line[0][i])
+		{
+			temp[i] = line[0][i];
+			i++;
+		}
+		free(*line);
+		temp[i] = '\0';
+		*line = temp;
+	}
+	ft_strlcat(*line, buff, ft_strlen(*line) + nbchar + 1);
 }
+
 
 char	*get_next_line(int fd)
 {
-	static char cont[BUFFER_SIZE];
+	static char	buff[BUFFER_SIZE + 1];
+	char		*line;
+	ssize_t		nbchar;
 
-	if(cont[0] == '\0')
-		read(fd, cont, BUFFER_SIZE);
+	if (buff[0] == '\0')
+		if (!read(fd, buff, BUFFER_SIZE))
+			return (NULL);
+	line = 0;
+	nbchar = 1;
+	while (!ft_strchr(buff, '\n'))
+	{
+		ft_fill(buff, &line, ft_strlen(buff));
+		nbchar = read(fd, buff, BUFFER_SIZE);
+		if (nbchar <= 0)	
+			break;
+	}
+	if (nbchar > 0)
+		ft_fill(buff, &line, ft_str_stop(buff, '\n') + 1);
+	else if (nbchar == 0)
+		ft_fill("\n", &line, 1);
 	else
-
-		while (!ft_strchr(cont, '\n'))
-		{
-			ft_fill(cont);
-			read(fd, cont, BUFFER_SIZE);
-		}
-	return (cont);
+		return (free(line), NULL);
+	ft_push_left(buff);
+	return (line);
 }

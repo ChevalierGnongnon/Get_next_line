@@ -6,7 +6,7 @@
 /*   By: chhoflac <chhoflac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 09:38:06 by chhoflac          #+#    #+#             */
-/*   Updated: 2023/12/29 15:35:06 by chhoflac         ###   ########.fr       */
+/*   Updated: 2024/01/05 02:29:51 by chhoflac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ size_t ft_str_stop(char *s, char c)
 	size_t	i;
 	
 	i = 0;
-	while (s[i] != c)
+	if (!s)
+		return (0);
+	while (s[i] && s[i] != c)
 		i++;
-	if (c != '\0')
-		return(i + 2);
 	return (i);
 }
 
@@ -36,4 +36,31 @@ char	*ft_strchr(const char *s, int c)
 		i++;
 	}
 	return ((char *)&s[i]);
+}
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
+{
+	size_t	i;
+	size_t	dlen;
+
+	dlen = ft_strlen(dst);
+	i = 0;
+	if (dlen > size || size == 0)
+		return (ft_strlen(src) + size);
+	while ((src[i] != '\0') && dlen + i < size - 1)
+	{
+		dst[dlen + i] = src[i];
+		i++;
+	}
+	dst[dlen + i] = '\0';
+	return (dlen + ft_strlen(src));
 }
